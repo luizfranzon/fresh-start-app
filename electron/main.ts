@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, globalShortcut, ipcMain } from "electron";
 // import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -46,6 +46,8 @@ function createWindow() {
 
   // Test active push message to Renderer-process.
   win.webContents.on("did-finish-load", () => {
+    win?.webContents.setZoomFactor(1);
+    win?.webContents.setVisualZoomLevelLimits(1, 1);
     win?.webContents.send("main-process-message", new Date().toLocaleString());
   });
 
